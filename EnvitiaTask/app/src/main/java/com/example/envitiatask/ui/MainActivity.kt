@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         binding.okButton.setOnClickListener {
             val message = binding.inputField.text.toString()
             viewModel.addEntry(message)
-            // any other logic...
             binding.inputField.text.clear()
         }
 
@@ -72,7 +71,6 @@ class MainActivity : AppCompatActivity() {
             val entries = savedLog.lines()
                 .filter { it.isNotBlank() }
                 .map { line ->
-                    // Try to split into timestamp + message
                     val match = Regex("""\[(.*?)] (.+)""").find(line)
                     if (match != null) {
                         val (time, message) = match.destructured
