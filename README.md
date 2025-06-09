@@ -1,49 +1,42 @@
-# ✨ Envitia Task Logger ✨
+✨ Envitia Task Logger ✨
+A simple Android app that lets you type log messages, view them in a scrollable list, save them to a file, and reload them when the app restarts. Includes:
 
-A simple Android app that lets you type log messages, view them in a scrollable list, save them to a file, and re-load them when the app restarts. Includes:
-
-✅ Real-time log display  
-✅ Persistent storage to internal file  
-✅ Auto-load logs on launch  
-✅ Clear log button  
-✅ Disabled "OK" button until input is provided  
-✅ ViewModel-based architecture  
-✅ Unit-tested with Robolectric  
+✅ Real-time log display
+✅ Persistent storage to internal file
+✅ Auto-load logs on launch
+✅ Clear log button
+✅ Disabled "OK" button until input is provided
+✅ ViewModel-based architecture
+✅ Unit-tested with Robolectric
 ✅ Espresso-ready setup
 
----
+🚀 Features
+Log input
+Type a message and press OK to log it with a timestamp.
 
-## 🚀 Features
+ScrollView output
+View all log entries in a scrollable text view.
 
-- **Log input**  
-  Type a message and hit OK to log it with a timestamp.
+File storage
+Logs are saved to internal storage and automatically reloaded when the app restarts.
 
-- **ScrollView output**  
-  View all log entries in a scrollable text view.
+Button behaviour
+"OK" is disabled when the input is empty. "Clear Logs" removes all saved entries.
 
-- **File storage**  
-  Logs are saved to internal storage and automatically reloaded when the app restarts.
+🧪 Testing
+Unit tests written for MainViewModel using Robolectric
 
-- **Button behavior**  
-  "OK" is disabled when the input is empty. "Clear Logs" wipes everything.
+Espresso test setup included (ready for your UI assertions!)
 
----
+🛠️ Tech
+Kotlin
 
-## 🧪 Testing
+ViewModel + LiveData
 
-- Unit tests written for `MainViewModel` using **Robolectric**
-- Espresso test setup included (just add your UI assertions!)
+DataBinding
 
----
+Robolectric + JUnit
 
-## 🛠️ Tech
-
-- Kotlin
-- ViewModel + LiveData
-- DataBinding
-- Robolectric + JUnit
-- Espresso (for UI testing)
-
----
+Espresso (for UI testing)
 
 Made with ☕ and 💻 by Bobby
