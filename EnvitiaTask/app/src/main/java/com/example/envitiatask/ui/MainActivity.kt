@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         clearButton.setOnClickListener {
-            viewModel.logEntries.value = mutableListOf()
+            viewModel.clearEntries()
             FileHelper.clearFile(this)
         }
 

@@ -69,7 +69,7 @@ class MainViewModel : ViewModel() {
 
     fun clearEntries() {
         logEntries.value = mutableListOf()
-        updateFormattedLog()
+        formattedLog.value = ""
     }
 
     private fun updateFormattedLog() {
