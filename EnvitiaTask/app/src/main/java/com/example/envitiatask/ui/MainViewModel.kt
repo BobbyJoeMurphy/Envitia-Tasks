@@ -23,6 +23,10 @@ class MainViewModel : ViewModel() {
         updateFormattedLog()
     }
 
+    fun hasUndecryptedEntries(): Boolean {
+        return logEntries.value?.any { it.decryptedMessage == null } == true
+    }
+
     fun saveEncryptedEntry(context: Context, plainMessage: String) {
         val time = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
         val encrypted = EncryptionHelper.encrypt(plainMessage)

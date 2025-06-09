@@ -49,6 +49,11 @@ class MainActivity : AppCompatActivity() {
             binding.okButton.isEnabled = it.toString().isNotBlank()
         }
 
+        viewModel.logEntries.observe(this) {
+            clearButton.isEnabled = it.isNotEmpty()
+            binding.decryptButton.isEnabled = viewModel.hasUndecryptedEntries()
+        }
+
         okButton.setOnClickListener {
             val message = inputField.text.toString().trim()
             if (message.isNotEmpty()) {
