@@ -58,6 +58,7 @@ Logs are saved to internal storage and automatically reloaded when the app resta
 ## 🛠️ Tech
 
 - Kotlin
+- Bouncy castle
 - ViewModel + LiveData
 - DataBinding
 - Robolectric + JUnit
