@@ -11,6 +11,7 @@ databindingRuntime = "8.10.1"
 junitKtx = "1.2.1"
 espressoCoreVersion = "3.6.1"
 robolectric = "4.11.1"
+bouncycastleVersion = "1.77"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,6 +25,7 @@ androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", ve
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreVersion" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+bouncycastle = { group = "org.bouncycastle", name = "bcprov-jdk15to18", version.ref = "bouncycastleVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

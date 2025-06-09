@@ -52,5 +52,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.activity.ktx)
     testImplementation(libs.robolectric)
+    implementation(libs.bouncycastle)
 
 }

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.envitiatask.R
 import com.example.envitiatask.databinding.ActivityMainBinding
 import com.example.envitiatask.model.LogEntry
+import com.example.envitiatask.utils.EncryptionHelper
 import com.example.envitiatask.utils.FileHelper
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -30,21 +31,30 @@ class MainActivity : AppCompatActivity() {
         val okButton = binding.okButton
         val clearButton = binding.clearButton
 
-        viewModel.logEntries.observe(this) { entries ->
-            val log = entries.joinToString("\n") { "[${it.timestamp}] ${it.message}" }
-            logText.text = log
-            clearButton.isEnabled = entries.isNotEmpty()
+        binding.decryptButton.setOnClickListener {
+            viewModel.decryptAll()
         }
+
+        viewModel.formattedLog.observe(this) { log ->
+            logText.text = log
+        }
+
+        viewModel.logEntries.observe(this) {
+            clearButton.isEnabled = it.isNotEmpty()
+        }
+
         binding.okButton.isEnabled = false
 
         binding.inputField.addTextChangedListener {
             binding.okButton.isEnabled = it.toString().isNotBlank()
         }
 
-        binding.okButton.setOnClickListener {
-            val message = binding.inputField.text.toString()
-            viewModel.addEntry(message)
-            binding.inputField.text.clear()
+        okButton.setOnClickListener {
+            val message = inputField.text.toString().trim()
+            if (message.isNotEmpty()) {
+                viewModel.saveEncryptedEntry(this, message)
+                inputField.setText("")
+            }
         }
 
         clearButton.setOnClickListener {
@@ -52,34 +62,6 @@ class MainActivity : AppCompatActivity() {
             FileHelper.clearFile(this)
         }
 
-        okButton.setOnClickListener {
-            val message = inputField.text.toString().trim()
-            if (message.isNotEmpty()) {
-                viewModel.addEntry(message)
-                FileHelper.writeToFile(
-                    this, "[${
-                        SimpleDateFormat("HH:mm", Locale.getDefault()).format(
-                            Date()
-                        )
-                    }] $message"
-                )
-                inputField.setText("")
-            }
-        }
-        val savedLog = FileHelper.readFromFile(this)
-        if (savedLog.isNotBlank()) {
-            val entries = savedLog.lines()
-                .filter { it.isNotBlank() }
-                .map { line ->
-                    val match = Regex("""\[(.*?)] (.+)""").find(line)
-                    if (match != null) {
-                        val (time, message) = match.destructured
-                        LogEntry(time, message)
-                    } else {
-                        LogEntry("--", line)
-                    }
-                }
-            viewModel.logEntries.value = entries.toMutableList()
-        }
+        viewModel.loadSavedLog(FileHelper.readFromFile(this))
     }
 }
